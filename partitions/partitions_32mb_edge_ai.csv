@@ -1,0 +1,12 @@
+# ESP-IDF / PlatformIO Partition Table
+# 32MB Flash - Edge AI Model Storage & Industrial Quad-OTA
+# Name,     Type, SubType, Offset,   Size,      Flags
+nvs,        data, nvs,     0x9000,   0x6000,
+otadata,    data, ota,     0xf000,   0x2000,
+phy_init,   data, phy,     0x11000,  0x1000,
+factory,    app,  factory, 0x20000,  0x400000,
+app0,       app,  ota_0,   0x420000, 0x400000,
+app1,       app,  ota_1,   0x820000, 0x400000,
+models,     data, spiffs,  0xC20000, 0x1000000, # 16MB Edge AI Neural Network Models / Datasets
+storage,    data, spiffs,  0x1C20000,0x380000,
+coredump,   data, coredump,0x1FA0000,0x60000,

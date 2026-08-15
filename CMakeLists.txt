@@ -1,0 +1,16 @@
+idf_component_register(
+    SRCS
+        "main.cpp"
+    INCLUDE_DIRS
+        "."
+    REQUIRES
+        nvs_flash
+        esp_wifi
+        esp_event
+        esp_http_server
+        esp_https_ota
+        driver
+        mbedtls
+        mdns
+        app_update
+)

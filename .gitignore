@@ -1,0 +1,13 @@
+# Build artifacts & cache
+.build_cache/
+*.o
+*.a
+*.gch
+*.bin
+*.elf
+*.hex
+*.log
+
+# System files
+.DS_Store
+Thumbs.db

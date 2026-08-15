@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AetherIoT Documentation | Zero-Heap C++20 Industrial Framework</title>
+  <meta name="description" content="AetherIoT is an ultra-reliable, high-performance, zero-heap C++20 bare-metal framework for Industrial IoT across all Espressif silicon.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-badge">C++20</span>
+      <span class="brand-title">AetherIoT Docs</span>
+    </div>
+
+    <!-- Language Switcher -->
+    <div class="lang-switch">
+      <button class="lang-btn active" data-lang="en" onclick="setLanguage('en')">English</button>
+      <button class="lang-btn" data-lang="id" onclick="setLanguage('id')">Indonesia</button>
+    </div>
+
+    <!-- Search -->
+    <div class="search-box">
+      <input type="text" id="search-input" class="search-input" placeholder="Search API & tutorials...">
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav-section">
+      <div class="nav-heading">GETTING STARTED</div>
+      <ul class="nav-links">
+        <li><a href="#quickstart" class="nav-link" data-i18n="navQuickstart">Quickstart</a></li>
+        <li><a href="#silicon" class="nav-link" data-i18n="navSilicon">Hardware Targets</a></li>
+        <li><a href="#actuators" class="nav-link" data-i18n="navActuators">Actuators & Servos</a></li>
+        <li><a href="#multiplexer" class="nav-link" data-i18n="navMultiplexer">Sensor Multiplexer</a></li>
+        <li><a href="#security" class="nav-link" data-i18n="navSecurity">Security & Anti-Replay</a></li>
+        <li><a href="#cli" class="nav-link" data-i18n="navCli">Custom CLI Engine</a></li>
+        <li><a href="#lcd" class="nav-link" data-i18n="navLcd">Dynamic LCD Display</a></li>
+        <li><a href="#csv" class="nav-link" data-i18n="navCsv">CSV Logging Profiles</a></li>
+        <li><a href="#dashboard" class="nav-link" data-i18n="navDashboard">Web Dashboard</a></li>
+        <li><a href="#partitions" class="nav-link" data-i18n="navPartitions">Flash Partitions</a></li>
+        <li><a href="#mqtt" class="nav-link" data-i18n="navMqtt">MQTT Configurator</a></li>
+        <li><a href="#modbus" class="nav-link" data-i18n="navModbus">Modbus RTU Engine</a></li>
+        <li><a href="#buttons" class="nav-link" data-i18n="navButtons">Hardware Buttons</a></li>
+        <li><a href="#webhooks" class="nav-link" data-i18n="navWebhooks">REST & Webhooks</a></li>
+        <li><a href="#examples" class="nav-link" data-i18n="navExamples">Production Examples</a></li>
+        <li><a href="#install" class="nav-link" data-i18n="navInstall">Installation & Registry</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- Hero Header -->
+    <div class="hero">
+      <span class="hero-tag" data-i18n="heroTag">C++20 Zero-Heap Industrial IoT Framework</span>
+      <h1 data-i18n="heroTitle">Deterministic, High-Performance Embedded IoT</h1>
+      <p data-i18n="heroDesc">AetherIoT is an ultra-reliable, zero-heap C++20 bare-metal framework designed for industrial telemetry, smart agriculture, hydroponics dosing, weather stations, and high-density multi-actuator systems across all Espressif silicon.</p>
+    </div>
+
+    <!-- Quickstart Section -->
+    <section id="quickstart">
+      <h2 data-i18n="quickstartTitle">5-Line Declarative Quickstart</h2>
+      <p data-i18n="quickstartDesc">Get up and running in seconds with automatic Wi-Fi failover, real-time web telemetry, and safety range guards.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>main.cpp</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>#include "iot_framework.hpp"
+
+IOT_APP(app) {
+    // 1. Declarative Safety Guard
+    iot::guard("Temperature").max(35.0f).on_breach([](auto, auto v) {
+        iot::log_error("ALERT: Temperature %.1f C exceeded safe limit!", v);
+    });
+
+    // 2. Real-Time Telemetry Stream
+    app.on_data([](auto d) {
+        iot::log_info("Temp: %.1f C | Humidity: %.1f %%RH | pH: %.2f", d.temp, d.hum, d.ph);
+    });
+}</code></pre>
+      </div>
+    </section>
+
+    <!-- Silicon Targets Matrix -->
+    <section id="silicon">
+      <h2 data-i18n="siliconTitle">Supported Espressif Silicon Matrix</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Target SoC</th>
+            <th>Architecture</th>
+            <th>Key Features</th>
+            <th>Recommended Use</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>ESP32 Classic</strong></td>
+            <td>Xtensa Dual-Core (240MHz)</td>
+            <td>Wi-Fi 4, BLE 4.2, BT SPP</td>
+            <td>Hydroponics Gateways, RS-485 Modbus</td>
+          </tr>
+          <tr>
+            <td><strong>ESP32-S3</strong></td>
+            <td>Xtensa Dual-Core (240MHz)</td>
+            <td>Vector AI, USB OTG, Octal PSRAM</td>
+            <td>Edge AI Vision, Real-Time Fast DSP</td>
+          </tr>
+          <tr>
+            <td><strong>ESP32-S2</strong></td>
+            <td>Xtensa Single-Core (240MHz)</td>
+            <td>Native USB OTG, Low Deep Sleep</td>
+            <td>Portable Dataloggers, USB Dongles</td>
+          </tr>
+          <tr>
+            <td><strong>ESP32-C3</strong></td>
+            <td>RISC-V 32-bit (160MHz)</td>
+            <td>Wi-Fi 4, BLE 5.0 Long Range</td>
+            <td>Cost-Effective Smart Agriculture</td>
+          </tr>
+          <tr>
+            <td><strong>ESP32-C6</strong></td>
+            <td>RISC-V 32-bit (160MHz)</td>
+            <td><strong>Wi-Fi 6</strong>, Thread / Zigbee 802.15.4</td>
+            <td>Smart Farms, Matter Mesh Bridges</td>
+          </tr>
+          <tr>
+            <td><strong>ESP32-H2</strong></td>
+            <td>RISC-V 32-bit (96MHz)</td>
+            <td>Thread / Zigbee / Matter, BLE 5.3</td>
+            <td>Ultra-Low-Power Matter Sensors</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Actuators & Multi-Servo Section -->
+    <section id="actuators">
+      <h2 data-i18n="actuatorsTitle">Actuators & Multi-Servo Matrix</h2>
+      <p data-i18n="actuatorsDesc">High-density multi-servo controller with relay-like declarative syntax (open, close, toggle), 16-channel relays, PCA9685 12-bit PWM, and 74HC595 shift registers.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>Multi-Servo Relay-Like Usage</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>// 1. Assign descriptive names to servo channels
+iot::servo_name(0, "MainPipeValve");
+iot::servo_name(1, "InletValveA");
+
+// 2. Calibrate Closed (0 deg) and Open (90 deg) angles
+iot::servo_set_calib(0, 0.0f, 90.0f);
+
+// 3. Declarative relay-style operations
+iot::servo_open("MainPipeValve");   // Opens servo to 90 deg
+iot::servo_close("InletValveA");    // Closes servo to 0 deg
+iot::servo_toggle(0);               // Inverts current state
+bool open = iot::servo_is_open(0);  // Query state</code></pre>
+      </div>
+    </section>
+
+    <!-- Multiplexer Section -->
+    <section id="multiplexer">
+      <h2 data-i18n="multiplexerTitle">High-Density Sensor Multiplexing</h2>
+      <p data-i18n="multiplexerDesc">TCA9548A 8-channel I2C MUX, 1-Wire DS18B20 multi-drop array (16 probes on 1 pin), and CD74HC4067 16-channel analog MUX.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>Multiplexing Example</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>// 1. Read 1-Wire multi-drop temperature array (16 probes on 1 GPIO)
+float temp_zone1 = iot::read_temp_probe(0);
+float temp_zone2 = iot::read_temp_probe(1);
+
+// 2. Read 16-channel analog multiplexer (CD74HC4067)
+float analog_v0 = iot::read_analog_mux_voltage(0);
+
+// 3. Switch I2C Channel via TCA9548A (Channel 0 to 7)
+iot::i2c_channel(0);
+float lux = iot::read_lux();</code></pre>
+      </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security">
+      <h2 data-i18n="securityTitle">Decoupled Encryption & Anti-Replay</h2>
+      <p data-i18n="securityDesc">Independent symmetric ciphers (AES-256-CBC, AES-128, ChaCha20, HMAC) paired with an orthogonal anti-replay validation layer.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>Security Configuration</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>// 1. Select independent symmetric cipher
+iot::set_encryption(iot::Security::AES_256_CBC, "SecretKey256BitPanjang32Karakter!");
+
+// 2. Enable/disable decoupled anti-replay protection
+iot::enable_anti_replay(true, 60); // 60-second tolerance window</code></pre>
+      </div>
+    </section>
+
+    <!-- Custom CLI Section -->
+    <section id="cli">
+      <h2 data-i18n="cliTitle">Custom Extensible CLI Engine</h2>
+      <p data-i18n="cliDesc">Easily register custom commands with fluent chaining, typed arguments (int, float, bool), rich responses, and auto-generated help menus.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>Custom CLI Registration</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>// Register custom command with typed arguments
+iot::cli("pump")
+    .description("Control industrial process pump")
+    .usage("pump <on|off|dose> [volume_ml]")
+    .on_execute([](auto& ctx) {
+        auto action = ctx.arg(0);
+        float volume = ctx.arg_float(1, 10.0f);
+
+        if (action == "dose") {
+            iot::dose_ml(iot::Relay::PUMP_MAIN, volume);
+            ctx.respond_ok("Dosed %.1f mL successfully.", volume);
+        } else if (action == "on") {
+            iot::on(iot::Relay::PUMP_MAIN);
+            ctx.respond_ok("Pump turned ON.");
+        } else {
+            iot::off(iot::Relay::PUMP_MAIN);
+            ctx.respond_ok("Pump turned OFF.");
+        }
+    });</code></pre>
+      </div>
+    </section>
+
+    <!-- Dynamic LCD Display Section -->
+    <section id="lcd">
+      <h2 data-i18n="lcdTitle">Custom Dynamic Multi-Page LCD</h2>
+      <p data-i18n="lcdDesc">Fully user-defined LCD multi-page flipper with dynamic telemetry callbacks, custom labels, and direct cursor printing.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>Custom LCD Configuration</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>// 1. Define custom dynamic multi-page LCD layouts
+iot::lcd_page("Main Page")
+    .line(0, "== FARM NODE #1 ==")
+    .line(1, [](auto& d, auto& out) { out.format("Temp: %.1fC", d.temp); })
+    .line(2, [](auto& d, auto& out) { out.format("pH: %.2f EC: %.0f", d.ph, d.ec); })
+    .line(3, [](auto& d, auto& out) { out.format("Status: %s", d.online ? "ONLINE" : "STANDBY"); });
+
+// 2. Define secondary power monitoring page
+iot::lcd_page("Power")
+    .line(0, "== POWER STATS ==")
+    .line(1, [](auto& d, auto& out) { out.format("V: %.1fV I: %.2fA", d.voltage, d.current); })
+    .line(2, [](auto& d, auto& out) { out.format("Bat: %u%%", d.battery_pct); });
+
+// 3. Or print directly to any row/col:
+iot::lcd_print(0, 0, "Emergency Stop!");</code></pre>
+      </div>
+    </section>
+
+    <!-- CSV Logging Profiles Section -->
+    <section id="csv">
+      <h2 data-i18n="csvTitle">Configurable CSV Profiles & SD Logging</h2>
+      <p data-i18n="csvDesc">Pre-configured industry CSV presets (Environmental, Energy, Water, Agri, Vibration) with zero-data-loss SD logging and custom formatters.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>CSV Logging Profiles & Custom Formatters</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>// 1. Choose from pre-configured industry profiles:
+iot::csv_preset(iot::CSVProfile::ENVIRONMENTAL);     // Temp, Hum, Pres, Lux, PM2.5, Rain
+iot::csv_preset(iot::CSVProfile::ELECTRICAL_ENERGY); // AC Volts, Amps, Power, Energy kWh
+iot::csv_preset(iot::CSVProfile::WATER_AQUACULTURE); // WaterTemp, pH, EC, TDS, DO, Salinity
+iot::csv_preset(iot::CSVProfile::VIBRATION_STRUCTURAL); // Pitch, Roll, Vibration, Health
+
+// 2. Or provide custom header and formatting callback:
+iot::csv_custom_header("timestamp,temp,pressure,flow_rate\n");
+iot::csv_custom_formatter([](const auto& d, uint32_t ts, auto& out) {
+    out.format("%lu,%.2f,%.1f,%.2f\n", ts, d.temp, d.pressure, d.flow_rate);
+});</code></pre>
+      </div>
+    </section>
+
+    <!-- Web Dashboard Section -->
+    <section id="dashboard">
+      <h2 data-i18n="dashboardTitle">Customizable Embedded Web Dashboard</h2>
+      <p data-i18n="dashboardDesc">Single-page responsive web dashboard served from Flash RODATA with dynamic telemetry cards, interactive relays, and CLI console.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>Custom Web Widget Registration</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>// 1. Register custom real-time telemetry card widgets on the web dashboard
+iot::web_widget("bearing_temp", "Bearing Temperature", "°C");
+iot::web_widget("vibration_rms", "RMS Vibration", "g");
+
+// 2. Actuators, relays, WebSocket terminal CLI, and OTA flasher are auto-discovered!</code></pre>
+      </div>
+    </section>
+
+    <!-- Flash Partitions Section -->
+    <section id="partitions">
+      <h2 data-i18n="partitionsTitle">Board Partition Presets (4MB - 32MB)</h2>
+      <p data-i18n="partitionsDesc">Pre-configured flash memory layouts for dual OTA, edge AI models, crash dumps, and large NVS storage across all board configurations.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>Flash Partition Tables & Memory Map Inspection</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>// 1. Inspect flash partition table and geometry at runtime
+iot::print_partitions();
+uint32_t flash_mb = iot::flash_size_mb();
+std::string_view running_app = iot::running_partition();
+
+// 2. Available CSV partition table presets in /partitions:
+// - partitions_4mb_default.csv     (Dual OTA 1.5MB + SPIFFS + Coredump)
+// - partitions_4mb_large.csv       (Large 2.9MB App + Max Storage)
+// - partitions_8mb_dual_ota.csv    (Dual OTA 2.5MB + 2.5MB Storage + Coredump)
+// - partitions_16mb_industrial.csv (Dual OTA + Factory + 8MB Storage + Coredump)
+// - partitions_32mb_edge_ai.csv    (Dual OTA + 16MB Neural Models + Storage)</code></pre>
+      </div>
+    </section>
+
+    <!-- MQTT Configurator Section -->
+    <section id="mqtt">
+      <h2 data-i18n="mqttTitle">Customizable MQTT Broker & Topic Schema</h2>
+      <p data-i18n="mqttDesc">Fluent MQTT configuration supporting custom brokers, auth credentials, custom pub/sub topic trees, QoS 0-2, retain, and JSON serializers.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>Fluent MQTT Configuration</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>// Configure custom MQTT broker and topic tree with fluent chaining:
+iot::mqtt()
+    .broker("mqtt.enterprise.io", 8883)
+    .credentials("gate_01", "operator", "SecretPass123")
+    .telemetry_topic("factory/line1/telemetry")
+    .command_topic("factory/line1/control")
+    .qos(1)
+    .retain(true);</code></pre>
+      </div>
+    </section>
+
+    <!-- Modbus RTU Section -->
+    <section id="modbus">
+      <h2 data-i18n="modbusTitle">Modbus RTU / RS-485 Master Engine</h2>
+      <p data-i18n="modbusDesc">Decoupled Modbus query builder with standard function codes (FC01-FC16), deterministic CRC-16, and response dispatchers.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>Modbus Query & Response Chaining</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>// Query slave device holding registers with fluent callbacks:
+iot::modbus_query(1)
+    .read_holding(0x0001, 2)
+    .on_response([](uint8_t slave, auto fc, std::span<const uint16_t> regs) {
+        printf("Received from slave %u: Reg0=%u, Reg1=%u\n", slave, regs[0], regs[1]);
+    })
+    .execute();</code></pre>
+      </div>
+    </section>
+
+    <!-- Hardware Buttons Section -->
+    <section id="buttons">
+      <h2 data-i18n="buttonTitle">Debounced Hardware Buttons & Long-Press</h2>
+      <p data-i18n="buttonDesc">Fluent digital inputs with active low/high polarity, internal pullups, and chained press, release, and long-press event handlers.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>Button Chaining & Long-Press Detection</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>// Register button on GPIO 0 with debounce and long-press handler:
+iot::button(0, true)
+    .on_press([]() { printf("Tactile button pressed!\n"); })
+    .on_long_press(3000, []() {
+        printf("Emergency Factory Reset Triggered!\n");
+    });</code></pre>
+      </div>
+    </section>
+
+    <!-- HTTP REST & Webhooks Section -->
+    <section id="webhooks">
+      <h2 data-i18n="webhookTitle">HTTP REST Webhooks & Push Alerts</h2>
+      <p data-i18n="webhookDesc">Direct HTTP POST and embedded webhooks for instantaneous Telegram Bot, Discord, and cloud API notifications.</p>
+
+      <div class="code-container">
+        <div class="code-header">
+          <span>Instant Webhook Notifications</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>// 1. Post JSON payload to custom REST endpoint:
+iot::http_post("https://api.factory.io/v1/event", "{\"status\":\"CRITICAL\"}");
+
+// 2. Dispatch instant alert to Telegram Bot or Discord:
+iot::webhook_telegram("BOT_TOKEN_XYZ", "CHAT_ID_123", "⚠️ Hydraulic Pressure High!");
+iot::webhook_discord("https://discord.com/api/webhooks/...", "🚨 Overheat Alert!");</code></pre>
+      </div>
+    </section>
+
+    <!-- Production Examples Section -->
+    <section id="examples">
+      <h2 data-i18n="navExamples">Production Examples</h2>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">00_minimal_5_lines_quickstart</div>
+          <p>5-line minimal declarative entry point with auto Wi-Fi and guards.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">01_smart_hydroponics_dosing</div>
+          <p>NFT/DFT hydroponics dosing, Nernst pH & EC25 compensation, ultrasonic tank level.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">02_precision_agriculture_lora_mesh</div>
+          <p>Solar ULP deep sleep (< 15 uA), 7-in-1 NPK soil probe, LoRa 915 MHz star mesh, MPU6050 tilt guard.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">03_industrial_energy_pzem_gateway</div>
+          <p>PZEM AC power quality monitor (V, I, W, kWh), MicroSD daily CSV logging, AES-256 WebSocket.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">04_aquaculture_autofeeder_pool</div>
+          <p>Dissolved oxygen monitoring, inrush aerator staggering, scheduled stepper feeder.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">05_thread_matter_smart_greenhouse</div>
+          <p>ESP32-C6 Wi-Fi 6 + Thread Mesh CoAP, PCA9685 spectrum tuning, latching valves.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">06_industrial_weather_station_rain_gauge</div>
+          <p>Pulse tipping bucket rain gauge (mm/h, daily mm), anemometer wind speed, flood SMS alerts.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">07_ble_serial_and_bluetooth_ota</div>
+          <p>BLE Nordic UART smartphone CLI terminal + in-field phone wireless BLE firmware flasher.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">08_multi_servo_matrix_and_sensor_multiplexer</div>
+          <p>16-32 Multi-Servo matrix with relay-like API, TCA9548A I2C MUX, and 1-Wire multi-drop array.</p>
+        </div>
+        <div class="card">
+          <div class="card-title">09_custom_cli_and_advanced_sensors</div>
+          <p>Custom extensible CLI engine, BME680 IAQ gas, SCD40 NDIR CO2, RTD PT100, and 4-20mA loop transmitter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section id="install">
+      <h2 data-i18n="navInstall">Installation & Registry</h2>
+      <h3>PlatformIO</h3>
+      <div class="code-container">
+        <div class="code-header">
+          <span>platformio.ini</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>[env:esp32dev]
+platform = espressif32
+board = esp32dev ; or esp32-s3-devkitc-1, esp32-c3-devkitm-1, esp32-c6-devkitc-1
+framework = espidf ; or arduino
+build_flags = -std=c++20 -O2
+lib_deps =
+    dhimasardinata/AetherIoT @ ^0.0.1</code></pre>
+      </div>
+
+      <h3>ESP-IDF Component Registry</h3>
+      <div class="code-container">
+        <div class="code-header">
+          <span>main/idf_component.yml</span>
+          <button class="copy-btn" onclick="copyToClipboard(this)" data-i18n="copyCode">Copy</button>
+        </div>
+        <pre><code>dependencies:
+  dhimasardinata/AetherIoT: "^0.0.1"</code></pre>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

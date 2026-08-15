@@ -1,0 +1,22 @@
+version: "0.0.1"
+description: "Unified Zero-Heap C++20 Industrial IoT Framework for ESP32 with 16-channel actuators, 32-servo matrix with relay-like API, TCA9548A I2C MUX, 1-Wire DS18B20 array, rain gauge, BLE serial monitor & OTA, tiered offline caching, MicroSD CSV logging, multi-SSID failover, LoRa SX1276, Modbus RS-485, AES-128/AES-256 encryption, PCA9685 PWM, Dual-Engine OTA, and embedded Web Dashboard."
+url: "https://github.com/dhimasardinata/AetherIoT"
+maintainers:
+  - "Dhimas Ardinata <dhimasardinatapp@gmail.com>"
+tags:
+  - iot
+  - industrial
+  - esp32
+  - servos
+  - multiplexer
+  - rain-gauge
+  - ble-ota
+  - modbus
+  - lora
+  - sd-card
+  - encryption
+  - ota
+  - websocket
+  - hydroponics
+dependencies:
+  idf: ">=4.4.0"

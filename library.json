@@ -1,0 +1,67 @@
+{
+  "name": "AetherIoT",
+  "version": "0.0.1",
+  "description": "Unified Zero-Heap C++20 Industrial IoT Framework for ESP32/ESP8266. Features 16-channel actuators, 32-servo matrix with relay-like API, TCA9548A I2C MUX, 1-Wire DS18B20 array, rain gauge, BLE serial monitor & OTA, tiered caching, SD Card CSV logging, multi-SSID failover, gateway control modes, multi-scheme payload encryption (AES-128, AES-256-CBC, ChaCha20), LoRa SX1276, PCA9685 PWM dimming, 74HC595 64-relay matrix, dual-engine OTA, embedded real-time Web Dashboard, and declarative safety guards.",
+  "keywords": [
+    "iot",
+    "esp32",
+    "esp8266",
+    "zero-heap",
+    "cpp20",
+    "servos",
+    "multiplexer",
+    "rain-gauge",
+    "ble-ota",
+    "modbus",
+    "lora",
+    "sd-card",
+    "actuators",
+    "ota",
+    "websocket",
+    "hydroponics",
+    "agriculture",
+    "industrial"
+  ],
+  "authors": [
+    {
+      "name": "Dhimas Ardinata",
+      "email": "dhimasardinatapp@gmail.com",
+      "url": "https://github.com/dhimasardinata",
+      "maintainer": true
+    }
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/dhimasardinata/AetherIoT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dhimasardinata/AetherIoT.git"
+  },
+  "frameworks": ["arduino", "espidf"],
+  "platforms": ["espressif32", "espressif8266"],
+  "headers": [
+    "iot_framework.hpp",
+    "config.hpp"
+  ],
+  "build": {
+    "flags": [
+      "-std=c++20",
+      "-O2"
+    ]
+  },
+  "export": {
+    "include": [
+      "*.hpp",
+      "*.h",
+      "*.cpp",
+      "*.c",
+      "examples/*",
+      "CMakeLists.txt",
+      "library.json",
+      "library.properties",
+      "idf_component.yml",
+      "LICENSE",
+      "README.md",
+      "README.id.md"
+    ]
+  }
+}
